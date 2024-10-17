@@ -21,7 +21,7 @@ function AuthController() {
       }
 
         var passwordIsValid = bcrypt.compareSync(password, user.password);
-
+        console.log(passwordIsValid)
         if (!passwordIsValid) {
           return errorResponse(req, res, "Mật khẩu không hợp lệ!", 401);
           // res.status(401).send({

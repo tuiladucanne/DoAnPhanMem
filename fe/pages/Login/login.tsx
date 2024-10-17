@@ -36,8 +36,13 @@ const LoginScreen = (props: {
   const [password, setPassword] = useState<string>("");
 
   const handleLoginPress = async () => {
+    console.log(JSON.stringify( {
+      email: email,
+      password: password,
+      role: "KH",
+    }))
     await axios
-      .post("http://localhost:8080/user/dangnhap", {
+      .post("http://192.168.1.38:5000/user/dangnhap", {
         email: email,
         password: password,
         role: "KH",

@@ -76,12 +76,11 @@ export const OurApp = () => {
   return isShowSplash ? (
     <SplashScreen />
   ) : (
-    // <Stack.Navigator screenOptions={{ headerShown: false }}>
-    //   <Stack.Screen name="Login" component={LoginScreen} />
-    //   <Stack.Screen name="Registor" component={RegisterScreen} />
-    //   <Stack.Screen name="ForgotPass" component={ForgotScreen} />
-    // </Stack.Navigator>
-    <BSAIScreen></BSAIScreen>
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="Login" component={LoginScreen} />
+      <Stack.Screen name="Registor" component={RegisterScreen} />
+      <Stack.Screen name="ForgotPass" component={ForgotScreen} />
+    </Stack.Navigator>
   );
 };
 

@@ -8,7 +8,7 @@ import {
   Dimensions,
 } from "react-native";
 import Header from "../../../components/Header";
-import ThongBaoCard from "./ListThongBao";
+import ThongBaoCard from "../thongbao/listThongBao";
 import { RFPercentage } from "react-native-responsive-fontsize";
 import axios from "axios";
 const { width } = Dimensions.get("window");
@@ -17,7 +17,7 @@ const ThongBao = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/user/thongbao")
+      .get("http://192.168.1.38:5000/user/thongbao")
       .then(function (res) {
         const data = res.data.data;
         setThongBaoData(data);

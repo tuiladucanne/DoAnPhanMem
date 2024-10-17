@@ -1,29 +1,36 @@
+// Import các thư viện cần thiết
 const express = require("express");
-const app = express();
-const bodyParser = require("body-parser"); // unistall
-const route = require("./routes");
 const cors = require("cors");
 const connectDB = require('./database/mongoose'); 
-require("dotenv").config();
-// Middleware để phân tích cú pháp yêu cầu có nội dung JSON
-app.use(bodyParser.json());
-app.use(express.json());
-// Middleware để phân tích cú pháp yêu cầu URL-encoded
+const route = require("./routes");
+require('dotenv').config({ path: './src/.env' }); // Đọc file .env để lấy biến môi trường
+// const API_URL = "http://192.168.1.38:5000";
+// Khởi tạo ứng dụng Express
+const app = express();
+
+
+app.use(express.json()); 
 app.use(express.urlencoded({ extended: true }));
 
-app.use(cors());
+// Cấu hình CORS
+const corsOptions = {
+  origin: "*", 
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+};
+app.use(cors(corsOptions));
 
+// Định tuyến (routes)
 app.use("/", route);
 
-const port = process.env.PORT || 3000; // Cổng mặc định hoặc từ biến môi trường
-
-// Kết nối đến MongoDB
+// Cổng mặc định hoặc từ biến môi trường
+const port = process.env.PORT || 3000;
+const apiUrl = process.env.API_URL;
+// Kết nối đến MongoDB và khởi động server
 connectDB().then(() => {
-  // Khởi chạy máy chủ Express sau khi kết nối MongoDB thành công
   app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
   });
 }).catch(err => {
-  // Xử lý lỗi nếu có lỗi trong quá trình kết nối MongoDB
   console.error('Failed to start server due to MongoDB connection error:', err);
 });

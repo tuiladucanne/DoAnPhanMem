@@ -13,68 +13,64 @@ module.exports.hello = async (req, res) => {
 module.exports.dangkyTK = async (req, res, next) => {
   try {
     const { email, password, username, role } = req.body;
-    if (role === null) {
-      const userData = new TaiKhoan(req.body);
-      console.log(userData);
-      console.log(email);
-      const userExist = await TaiKhoan.findOne({ email });
 
-      if (userExist) {
-        return res.status(400).json({ message: "User already exits." });
-      }
+    // Kiểm tra các trường bắt buộc
+    if (!email || !password || !username) {
+      return res.status(400).json({ message: "Please provide all required fields." });
+    }
 
-      // Mã hóa mật khẩu trước khi lưu
-      const salt = await bcrypt.genSalt(10);
-      userData.password = await bcrypt.hash(userData.password, salt);
+    // Kiểm tra xem người dùng đã tồn tại chưa
+    const userExist = await TaiKhoan.findOne({ email });
+    if (userExist) {
+      return res.status(400).json({ message: "User already exists." });
+    }
 
-      const saveUser = await userData.save();
+    // Tạo đối tượng người dùng và mã hóa mật khẩu
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
 
+    const userData = new TaiKhoan({ email, password: hashedPassword, role });
+
+    const saveUser = await userData.save();
+
+    if (!role || role === "KH") {
+      // Tạo đối tượng BenhNhan nếu role là KH hoặc không có role
       const newBenhNhan = new BenhNhan({
         Ten: username,
         Email: email,
         accountId: saveUser._id,
       });
 
+      // Lưu đối tượng BenhNhan
       const saveBenhNhan = await newBenhNhan.save();
-      res.status(200).json({
+
+      return res.status(200).json({
         message: "User registered successfully",
         taiKhoan: saveUser,
         benhNhan: saveBenhNhan,
       });
     } else if (role === "NV") {
-      const userData = new TaiKhoan(req.body);
-      console.log(userData);
-      console.log(email);
-      const userExit = await TaiKhoan.findOne({ email });
-
-      if (userExit) {
-        return res.status(400).json({ message: "User already exits." });
-      }
-
-      // Mã hóa mật khẩu trước khi lưu
-      const salt = await bcrypt.genSalt(10);
-      userData.password = await bcrypt.hash(userData.password, salt);
-
-      const saveUser = await userData.save();
-
+      // Tạo đối tượng NhanVien nếu role là NV
       const newNhanVien = new NhanVien({
         HoTen: username,
         Email: email,
         MaTK: saveUser._id,
       });
 
+      // Lưu đối tượng NhanVien
       const saveNhanVien = await newNhanVien.save();
-      res.status(200).json({
+
+      return res.status(200).json({
         message: "User registered successfully",
         taiKhoan: saveUser,
         NhanVien: saveNhanVien,
       });
     }
   } catch (error) {
-    res.status(500).json({ error: "internal sever error" });
+    console.error("Error during user registration:", error);
+    return res.status(500).json({ message: "Internal server error" });
   }
 };
-
 module.exports.dangnhap = async (req, res, next) => {
   try {
     const { email, password, role } = req.body;
@@ -85,8 +81,9 @@ module.exports.dangnhap = async (req, res, next) => {
       if (!user) {
         res.status(400).json({ message: "user does not exits" });
       }
-
+      console.log(password)
       const isMatch = await bcrypt.compare(password, user.password);
+      console.log(isMatch)
       if (!isMatch) {
         return res.status(400).json({ message: "invalid password." });
       }

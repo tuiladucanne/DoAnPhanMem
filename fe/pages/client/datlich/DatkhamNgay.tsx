@@ -41,7 +41,7 @@ const DatlichNgayScreen = (props: any) => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/user/dangkykhambenh/theongay")
+      .get("http://192.168.1.38:5000/user/dangkykhambenh/theongay")
       .then(function (res) {
         const departments = res.data.dataKhoa.map(
           (khoa: { _id: any; tenkhoa: any }) => ({

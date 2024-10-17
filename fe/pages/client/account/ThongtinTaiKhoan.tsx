@@ -44,8 +44,9 @@ const DetailTaiKhoan = (props: any) => {
   };
 
   const handleCapnhap = async () => {
-    await axios
-      .put("http://localhost:8080/user/capnhapthongtin", {
+    await axios.put(
+      'http://192.168.1.38:5000/user/capnhapthongtin',
+      {
         Email: Email,
         Ten: name,
         NgaySinh: ngaySinh,
@@ -53,19 +54,27 @@ const DetailTaiKhoan = (props: any) => {
         SDT: SDT,
         GioiTinh: gioiTinh,
         CCCD: cccd,
-      })
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    )
       .then(function (res) {
         Toast.show({
-          type: "success",
-          text1: "Cập nhập thành công",
+          type: 'success',
+          text1: 'Cập nhập thành công',
         });
         props.navigation.goBack();
         setUser(res.data.updatedUser);
         console.log(res.data.updatedUser);
+        
       })
       .catch(function (err) {
-        console.log(err);
+        console.log('Lỗi từ API:', err.response?.data || err.message);
       });
+    
   };
 
   return (

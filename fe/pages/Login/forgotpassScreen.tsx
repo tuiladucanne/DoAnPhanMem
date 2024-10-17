@@ -19,7 +19,7 @@ const ForgotScreen = (props: { navigation: { goBack: () => void } }) => {
   const [nhaplai, setNhaplai] = useState("");
   const handleUpdatePress = () => {
     axios
-      .post("http://localhost:8080/user/laylaimk", {
+      .post("http://192.168.1.33:5000/user/laylaimk", {
         email: email,
         matkhau: password,
       })

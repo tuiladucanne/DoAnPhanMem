@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { FontAwesome5 } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 import {
   Text,
   View,
@@ -41,70 +42,72 @@ const RegisterScreen: React.FC = (props) => {
 
   const handleRegisterPress = async () => {
     let isValid = true;
-
-    //ten cua nguoi dung
+  
     if (fullName.length < 3) {
       setFullNameError("Họ và tên phải có ít nhất 3 ký tự");
       isValid = false;
     } else {
       setFullNameError("");
     }
-
-    // if (phoneNumber.length < 10) {
-    //   setPhoneNumberError("Số điện thoại phải có ít nhất 10 ký tự");
-    //   isValid = false;
-    // } else {
-    //   setPhoneNumberError("");
-    // }
-
+  
     if (!email.includes("@")) {
       setEmailError("Email không hợp lệ");
       isValid = false;
     } else {
       setEmailError("");
     }
-
+  
     if (password.length < 6) {
       setPasswordError("Mật khẩu phải có ít nhất 6 ký tự");
       isValid = false;
     } else {
       setPasswordError("");
     }
-
+  
     if (password !== confirmPassword) {
       setConfirmPasswordError("Mật khẩu và xác nhận mật khẩu không khớp");
       isValid = false;
     } else {
       setConfirmPasswordError("");
     }
-
+  
     if (isValid) {
-      console.log("da nhan click");
-      await axios
-        .post("http://localhost:8080/user/dangky", {
+      console.log("Đã nhấn nút đăng ký - Gửi yêu cầu API"); // Kiểm tra xem có chạy đến đây không
+      console.log(JSON.stringify( {
           email: email,
           password: password,
           username: fullName,
-        })
-        .then(function (response) {
-          console.log(response);
+        }))
+      try {
+        const response = await axios.post("http://192.168.1.38:5000/user/dangky", {
+          email: email,
+          password: password,
+          username: fullName,
+        });
+        console.log("Phản hồi từ server:", response); // Log phản hồi từ server
+  
+        if (response.status === 200 || response.data.success) {
           Toast.show({
             type: "success",
             text1: "Đăng ký thành công",
           });
-          setTimeout(() => {
-            props.navigation.navigate("Login");
-          }, 2000);
-        })
-        .catch(function (error) {
-          console.log(error);
-          Toast.show({
-            type: "error",
-            text1: "Lỗi hệ thống",
-          });
+        }
+        setTimeout(() => {
+          props.navigation.navigate("Login");
+        }, 2000);
+  
+      }catch (error) {
+        console.error("Lỗi từ API:", error.message);
+        Toast.show({
+          type: "error",
+          text1: "Lỗi hệ thống",
+          text2: "Không thể kết nối đến server hoặc thời gian chờ đã hết",
         });
+      }
     }
   };
+  
+  
 
   return (
     <SafeAreaView style={styles.Container}>

@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, SafeAreaView, Image, ImageBackground } from 'react-native';
 
-const LoginScreen = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+const ForgotPasswordScreen = () => {
+  const [emailOrPhone, setEmailOrPhone] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
-  const handleLogin = () => {
-    console.log('Login pressed');
-    // Add your login logic here
-  };
-
-  const handleForgotPassword = () => {
-    console.log('Forgot Password pressed');
-    // Add your forgot password logic here
+  const handleChangePassword = () => {
+    if (newPassword === confirmPassword) {
+      console.log('Password changed successfully');
+      // Add your password change logic here
+    } else {
+      console.log('Passwords do not match');
+      // Handle password mismatch
+    }
   };
 
   return (
@@ -28,37 +29,43 @@ const LoginScreen = () => {
             <Text style={styles.companyName}>VOV</Text>
           </View>
           
-          <Text style={styles.loginTitle}>Vui lòng đăng nhập</Text> {/* Title outside the login box */}
+          <Text style={styles.loginTitle}>Đặt lại mật khẩu</Text> {/* Title outside the login box */}
           
           <View style={styles.loginBox}>
-            <Text style={styles.formTitle}>Đăng nhập</Text> {/* New title inside the login box */}
+            <Text style={styles.formTitle}>Đặt lại mật khẩu</Text> {/* New title inside the login box */}
             
             <View style={styles.form}>
               <View style={styles.inputContainer}>
                 <TextInput
                   style={styles.input}
-                  placeholder="Nhập tên đăng nhập"
-                  onChangeText={setUsername}
-                  value={username}
+                  placeholder="Nhập SĐT hoặc email"
+                  onChangeText={setEmailOrPhone}
+                  value={emailOrPhone}
                 />
               </View>
 
               <View style={styles.inputContainer}>
                 <TextInput
                   style={styles.input}
-                  placeholder="Nhập mật khẩu"
+                  placeholder="Nhập mật khẩu mới"
                   secureTextEntry={true}
-                  onChangeText={setPassword}
-                  value={password}
+                  onChangeText={setNewPassword}
+                  value={newPassword}
                 />
               </View>
 
-              <TouchableOpacity onPress={handleForgotPassword}>
-                <Text style={styles.forgotPassword}>Quên mật khẩu?</Text> {/* Underlined button */}
-              </TouchableOpacity>
+              <View style={styles.inputContainer}>
+                <TextInput
+                  style={styles.input}
+                  placeholder="Xác nhận mật khẩu mới"
+                  secureTextEntry={true}
+                  onChangeText={setConfirmPassword}
+                  value={confirmPassword}
+                />
+              </View>
 
-              <TouchableOpacity style={styles.button} onPress={handleLogin}>
-                <Text style={styles.buttonText}>Đăng nhập</Text>
+              <TouchableOpacity style={styles.button} onPress={handleChangePassword}>
+                <Text style={styles.buttonText}>Xác nhận</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -109,7 +116,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   loginTitle: {
-    marginLeft:'15%',
+    marginLeft: '15%',
     marginTop: '2%', // Use percentage for margin
     fontSize: 33, // Size for the login title
     fontWeight: 'bold',
@@ -118,11 +125,11 @@ const styles = StyleSheet.create({
     color: 'black',
   },
   loginBox: {
-    marginLeft :'25%',
+    marginLeft: '25%',
     backgroundColor: '#22668E',
     padding: '5%', // Use percentage for padding
     borderRadius: 20,
-    elevation: 5,
+    elevation : 5,
     width: '50%', // Use percentage for width
     alignItems: 'center',
     height: '50%',
@@ -130,7 +137,7 @@ const styles = StyleSheet.create({
   formTitle: {  
     fontSize: 24, // Size for the form title
     fontWeight: 'bold',
-    marginBottom: '5%', // Spacing below the form title
+    marginBottom: '10%', // Spacing below the form title
     textAlign: 'center',
     color: '#fff',
  },
@@ -176,4 +183,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LoginScreen;
+export default ForgotPasswordScreen;

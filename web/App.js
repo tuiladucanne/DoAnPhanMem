@@ -15,7 +15,7 @@ import TaiKhoanScreen from './page/TaiKhoan/TaiKhoan';
 
 
 // login&register
-import RegisterScreen from './login&register/register'
+import RegisterScreen from './page/TaiKhoan/TaiKhoan'
 // Khởi tạo Drawer Navigator
 const Drawer = createDrawerNavigator();
 

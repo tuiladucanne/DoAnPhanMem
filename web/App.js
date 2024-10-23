@@ -21,10 +21,10 @@ const Drawer = createDrawerNavigator();
 
 export default function App() {
   return (
-    // <NavigationContainer>
-    //  <InApp></InApp>
-    // </NavigationContainer>
-    <RegisterScreen></RegisterScreen>
+    <NavigationContainer>
+     <InApp></InApp>
+    </NavigationContainer>
+    
   );
 }
 

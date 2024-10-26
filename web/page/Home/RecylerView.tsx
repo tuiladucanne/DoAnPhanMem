@@ -10,7 +10,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-const { width, height } = Dimensions.get("window");
+const { width } = Dimensions.get("window");
 
 interface Doctor {
   name: string;
@@ -33,6 +33,7 @@ interface VerticalRecyclerViewProps {
   onPress: (item: DataItem) => void;
 }
 
+// RecyclerView cho bác sĩ (theo chiều ngang)
 const RecyclerView: React.FC<RecyclerViewProps> = ({ data, onPress }) => {
   const renderItem = ({ item }: { item: Doctor }) => (
     <TouchableOpacity
@@ -60,29 +61,32 @@ const RecyclerView: React.FC<RecyclerViewProps> = ({ data, onPress }) => {
   );
 };
 
+// RecyclerView cho bệnh viện (hiển thị theo chiều ngang)
 const VerticalRecyclerView: React.FC<VerticalRecyclerViewProps> = ({
   data,
   onPress,
 }) => {
   const renderItem = ({ item }: { item: DataItem }) => (
     <TouchableOpacity
-      style={styles.verticalItemContainer}
+      style={styles.itemContainer}
       onPress={() => onPress(item)}
     >
-      <Image source={item.image} style={styles.verticalItemImage} />
-      <View style={styles.verticalTextContainer}>
-        <Text style={styles.verticalItemText}>{item.text}</Text>
+      <Image source={item.image} style={styles.hospitalImage} />
+      <View style={styles.textContainer}>
+        <Text style={styles.hospitalText}>{item.text}</Text>
       </View>
     </TouchableOpacity>
   );
 
   return (
-    <SafeAreaView style={styles.verticalContainer}>
+    <SafeAreaView style={styles.container}>
       <FlatList
         data={data}
         renderItem={renderItem}
+        horizontal // Thêm thuộc tính horizontal để hiển thị theo chiều ngang
+        contentContainerStyle={styles.listContentContainer}
+        showsHorizontalScrollIndicator={false}
         keyExtractor={(item, index) => `${index}`}
-        contentContainerStyle={styles.verticalListContentContainer}
       />
     </SafeAreaView>
   );
@@ -91,15 +95,15 @@ const VerticalRecyclerView: React.FC<VerticalRecyclerViewProps> = ({
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "rgba(196, 234, 250, 0.3)",
+    paddingVertical: 10,
   },
   listContentContainer: {
     paddingHorizontal: 10,
   },
   itemContainer: {
-    width: width * 0.42,
-    height: width * 0.57,
+    width: width * 0.15,
+    height: width * 0.18,
     backgroundColor: "#ffffff",
-    padding: 10,
     marginVertical: 8,
     marginHorizontal: 8,
     borderRadius: 10,
@@ -107,65 +111,41 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.3,
     shadowRadius: 4,
-    alignItems: "center",
-    justifyContent: "space-between",
+    alignItems: 'center',
+    justifyContent:'space-between'
   },
   doctorImage: {
-    width: width * 0.35,
-    height: width * 0.35,
+    width: width * 0.13,
+    height: width * 0.13,
     borderRadius: (width * 0.35) / 2,
     marginBottom: 10,
   },
   doctorName: {
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: "bold",
     color: "#000",
     marginBottom: 5,
     textAlign: "center",
   },
   doctorSpecialty: {
-    fontSize: 14,
+    fontSize: 16,
     color: "#666",
     textAlign: "center",
   },
-  verticalContainer: {
-    backgroundColor: "#fff",
-    flex: 1,
-    paddingHorizontal: 10,
+  hospitalImage: {
+    width: width * 0.13,
+    height: width * 0.13,
+    borderRadius: 10,
+    marginBottom: 10,
   },
-  verticalListContentContainer: {
-    paddingBottom: 20,
+  textContainer: {
+    alignItems: "center",
   },
-  verticalItemContainer: {
-    height: width * 0.35,
-    flexDirection: "row",
-    backgroundColor: "rgba(196, 234, 250, 0.3)",
-    marginVertical: 4,
-    borderRadius: width * 0.04,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.3,
-    shadowRadius: 4,
-  },
-  verticalItemImage: {
-    width: width * 0.5,
-    height: width * 0.35,
-    borderRadius: width * 0.04,
-    marginRight: 2,
-  },
-  verticalTextContainer: {
-    flex: 1,
-    marginVertical: 3,
-    paddingHorizontal: 10,
-  },
-  verticalItemText: {
-    fontSize: 14,
+  hospitalText: {
+    fontSize: 18,
     color: "#000",
     fontWeight: "bold",
-    flexWrap: "wrap",
-    paddingTop: 7,
-    textAlign: "justify",
-    lineHeight: 20,
+    textAlign: "center",
   },
 });
 

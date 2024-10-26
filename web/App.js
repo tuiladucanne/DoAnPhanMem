@@ -16,14 +16,16 @@ import TaiKhoanScreen from './page/TaiKhoan/TaiKhoan';
 
 // login&register
 import RegisterScreen from './page/TaiKhoan/ChinhSuaHoSo'
+import ChinhSuaHoSo from './page/TaiKhoan/ChinhSuaHoSo';
 // Khởi tạo Drawer Navigator
 const Drawer = createDrawerNavigator();
 
 export default function App() {
   return (
-    <NavigationContainer>
-     <InApp></InApp>
-    </NavigationContainer>
+    // <NavigationContainer>
+    //  <InApp></InApp>
+    // </NavigationContainer>
+    <ChinhSuaHoSo></ChinhSuaHoSo>
     
   );
 }

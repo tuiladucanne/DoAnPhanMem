@@ -100,7 +100,7 @@ const ChinhSuaHoSo = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#4E91B5',
+        backgroundColor: '#e0f2ff',
         width: '100%',
     },
     leftContainer: {
@@ -114,69 +114,73 @@ const styles = StyleSheet.create({
         marginBottom: '5%',
     },
     logo: {
-        width: 100, // Adjust logo size with percentage
+        width: 100,
         height: 100,
         aspectRatio: 1,
         marginRight: '2%',
     },
     companyName: {
-        fontSize: 65, // Keep the original font size
+        fontSize: 65,
         fontWeight: 'bold',
     },
     pageTitle: {
-        fontSize: 24, // Keep the original font size
+        fontSize: 24,
         fontWeight: 'bold',
         textAlign: 'center',
         marginBottom: '3%',
     },
     formContainer: {
-        alignItems: 'center', // Center items horizontally
+        alignItems: 'center',
+        width: '100%',
     },
     inputContainer: {
-        alignItems:'center',
-        marginBottom: '1%',
-        flexDirection: 'column',
-        width: '100%', // Allow the input to take full width of the container
+        flexDirection: 'row',
+        alignItems: 'center',
+        width: '90%', // Rộng hơn một chút so với form container
+        marginBottom: 20, // Khoảng cách giữa các input
     },
     label: {
-        fontSize: 15, // Keep the original font size
-        marginBottom: '1%',
+        fontSize: 18, // Font size lớn hơn
+        width: '30%', // Label chiếm 30% chiều rộng
+        textAlign: 'left', // Căn label sang bên trái
+        color: '#000',
     },
     input: {
-        height: 50, // Adjust input box height to a smaller value
-        width: '50%', // Set to 100% to take full width of the container
+        height: 60, // Input box cao hơn một chút
+        width: '70%', // Input chiếm 70% chiều rộng
         borderColor: 'gray',
         borderWidth: 1,
-        paddingHorizontal: '5%',
+        paddingHorizontal: 15,
         backgroundColor: '#FFFFFF',
-        borderRadius: 15, // Add border radius
-        paddingVertical: 5, // Reduce vertical padding
-        color: 'black', // Text color
+        borderRadius: 10, // Bo tròn các góc
+        color: 'black', 
     },
     picker: {
-        height: 50, // Adjust picker height to a smaller value
-        width: '50%', // Set to 100% to take full width of the container
+        height: 60,
+        width: '70%',
         borderColor: 'gray',
         borderWidth: 1,
-        paddingHorizontal: '5%',
+        paddingHorizontal: 15,
         backgroundColor: '#FFFFFF',
-        borderRadius: 15, // Add border radius
-        paddingVertical: 5, // Reduce vertical padding
-        color: 'black', // Text color
+        borderRadius: 10,
+        color: 'black', 
     },
     saveButton: {
         alignItems: 'center',
-        width: '40%', // Set the width to a percentage of the parent container
+        justifyContent: 'center',
+        width: '30%', // Nút "Lưu" nhỏ hơn
         backgroundColor: '#22668E',
-        padding: '1%',
+        paddingVertical: 10, // Khoảng cách trên và dưới của nút
         borderRadius: 15,
-        marginTop: '2%', // Optional: Add some margin for better spacing
+        marginTop: 20,
+        alignSelf: 'center', // Căn giữa nút
     },
     saveButtonText: {
-        fontSize: 16, // Keep the original font size
+        fontSize: 18,
         color: '#FFFFFF',
         textAlign: 'center',
     },
 });
+
 
 export default ChinhSuaHoSo;  

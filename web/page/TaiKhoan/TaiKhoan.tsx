@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, SafeAreaView, Image, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import ChinhSuaHoSo from './ChinhSuaHoSo';
+
 const TaiKhoanScreen = (props) => {
     return (
         <ScrollView>

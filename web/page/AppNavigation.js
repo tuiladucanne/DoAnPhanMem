@@ -9,10 +9,14 @@ import { Ionicons } from '@expo/vector-icons'; // Thêm thư viện icon
 import TrangChuScreen from './Home/TrangChu';
 import DatKhamScreen from './DatKham/DatKham';
 import TaiKhoanScreen from './TaiKhoan/TaiKhoan';
-import ChinhSuaHoSo from './TaiKhoan/ChinhSuaHoSo';
 import ThongBaoScreen from './ThongBao/ThongBao';
 import PhieuKhamScreen from './PhieuKham/PhieuKham';
 
+
+
+import ChinhSuaHoSo from './TaiKhoan/ChinhSuaHoSo';
+import DatKhamBSScreen from './DatKham/DatKhamBS';
+import DatKhamNgayScreen from './DatKham/DatKhamNgay';
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
 
@@ -26,7 +30,12 @@ const HomeStack = () => (
 // Stack Navigator cho nhóm màn hình "Đặt Khám"
 const DatKhamStack = () => (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
+
         <Stack.Screen name="DatKhamScreen" component={DatKhamScreen} />
+        <Stack.Screen name="DatKhamBSScreen" component={DatKhamBSScreen} />
+        <Stack.Screen name="DatKhamNgayScreen" component={DatKhamNgayScreen} />
+
+
     </Stack.Navigator>
 );
 
@@ -107,7 +116,7 @@ const AppNavigator = () => {
                     ),
                     drawerLabelStyle: {
                         fontSize: 18, // Tăng kích thước nhãn
-                        color: '#1669A2', // Đổi màu nếu cần
+                        color: '#000', // Đổi màu nếu cần
                     },
                 }}
             />

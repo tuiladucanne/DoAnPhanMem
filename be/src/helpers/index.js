@@ -9,10 +9,10 @@ const errorResponse = (
   req,
   res,
   errorMessage = "Something went wrong",
-  code = 500,
+  code = 400,
   error = {}
 ) =>
-  res.status(500).json({
+  res.status(400).json({
     code,
     errorMessage,
     error,

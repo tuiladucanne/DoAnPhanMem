@@ -1,0 +1,19 @@
+# Gửi yêu cầu POST để đăng ký khám bệnh
+POST http://localhost:3001/user/dangkykhambenh/datkham
+Content-Type: application/json
+
+{
+  "benhVienId": "67420eadcf412d2f1bf4dfba",
+  "bacSiId": "674207b53a97d2e320e6cd9a",
+  "ngayKham": "5/6/2024",
+  "gioKham": "09:00",
+  "userId": "674141f882505254e4833c0a"
+}
+###
+
+
+GET http://localhost:3001/user/dangkykhambenh/all?id=674141f882505254e4833c0a
+
+
+###
+GET http://localhost:3001/user/tb?id=674141f882505254e4833c0a

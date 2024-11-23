@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
     },
     optionCard: {
         width: width*0.3,
-        height: width*0.15,
+        height: width*0.2,
         backgroundColor: '#fff',
         borderRadius: 10,
         padding: 15,

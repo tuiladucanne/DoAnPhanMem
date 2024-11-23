@@ -15,13 +15,13 @@ function AuthController() {
           // return res.status(400).json({ message: "User already exits." });
         }
 
-
-       if (!user.active) { // Kiểm tra tài khoản có bị vô hiệu hóa không
-        return errorResponse(req, res, "Tài khoản đã bị vô hiệu hóa.", 403);
-      }
+        if (!user.active) {
+          // Kiểm tra tài khoản có bị vô hiệu hóa không
+          return errorResponse(req, res, "Tài khoản đã bị vô hiệu hóa.", 403);
+        }
 
         var passwordIsValid = bcrypt.compareSync(password, user.password);
-        console.log(passwordIsValid)
+        console.log(passwordIsValid);
         if (!passwordIsValid) {
           return errorResponse(req, res, "Mật khẩu không hợp lệ!", 401);
           // res.status(401).send({
@@ -84,7 +84,6 @@ function AuthController() {
     }
   };
 
- 
   return this;
 }
 
